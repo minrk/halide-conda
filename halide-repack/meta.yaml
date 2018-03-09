@@ -19,6 +19,12 @@ build:
   skip: true  # [win]
   string: "repack"
 
+requirements:
+  build:
+    - zlib 1.2.*  # [linux]
+  run:
+    - zlib 1.2.*  # [linux]
+
 about:
   home: http://halide-lang.org
   license: MIT
