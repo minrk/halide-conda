@@ -19,7 +19,7 @@ build:
 requirements:
   build:
     - toolchain
-    - python {{ python }}
+    - python
     - pybind11
     - halide {{ version }}
   run:
