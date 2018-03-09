@@ -1,0 +1,34 @@
+{% set name = "halide" %}
+{% set version = "2018.02.15" %}
+{% set tag = "46d8e9e0cdae456489f1eddfd6d829956fc3c843" %}
+{% set sha256 = "6234f6832e5766970ba687d61e6d3904e7f591e78297edc5c799d1581c5b3669" %}  # [osx]
+{% set sha256 = "02893e36f4d4a19df0fedbe40d1cb37cac2f8d5baa4394b340c54d25a91ef742" %}  # [linux]
+{% set _plat = "mac-64" %}  # [osx]
+{% set _plat = "linux-64-gcc53" %}  # [linux]
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/halide/Halide/releases/download/release_{{ version.replace('.', '_') }}/halide-{{_plat}}-trunk-{{tag}}.tgz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  skip: true  # [win]
+  string: "repack"
+
+about:
+  home: http://halide-lang.org
+  license: MIT
+  license_family: MIT
+  # license_file: LICENSE.txt
+  summary: 'Python bindings for Halide, a language for image processing and computational photography'
+
+  description: |
+    Halide is a programming language designed to make it easier to write
+    high-performance data parallel processing code on modern machines. Its current front end is embedded in
+    C++. Compiler targets include x86/SSE, ARM v7/NEON, CUDA, Hexagon DSP, and OpenCL.
+  doc_url: http://halide-lang.org/docs/
+  dev_url: https://github.com/halide/Halide
