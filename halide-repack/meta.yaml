@@ -34,6 +34,10 @@ requirements:
     - zlib 1.2.*
   run:
     - zlib 1.2.*
+    # we should depend on the right libgcc x.y
+    # but the only libgcc-x.y versions packages are
+    # 4.8, 5.2, 7.2
+    # - libgcc {{ os.environ['HALIDE_GCC'][0] }}.*  # [linux]
 
 about:
   home: http://halide-lang.org
