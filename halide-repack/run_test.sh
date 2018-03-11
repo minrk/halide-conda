@@ -1,6 +1,7 @@
+set -ex
 
 if [[ $(uname) == "Darwin" ]]; then
-    export CXXFLAGS="-stdlib=libc++"
+    export CXXFLAGS="-stdlib=libc++ $CXXFLAGS"
 fi
 
 ${CXX:-c++} $CXXFLAGS -std=c++11 -I$PREFIX/include $RECIPE_DIR/test.cpp \
