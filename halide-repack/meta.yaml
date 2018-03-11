@@ -1,10 +1,18 @@
 {% set name = "halide" %}
 {% set version = "2018.02.15" %}
 {% set tag = "46d8e9e0cdae456489f1eddfd6d829956fc3c843" %}
-{% set sha256 = "6234f6832e5766970ba687d61e6d3904e7f591e78297edc5c799d1581c5b3669" %}  # [osx]
-{% set sha256 = "02893e36f4d4a19df0fedbe40d1cb37cac2f8d5baa4394b340c54d25a91ef742" %}  # [linux]
+{% set shas = {
+  "linux-64-gcc49": "4388a0feedae5cb38959e1dbdcbc92409f779dc609616ca722445b8e3a2ee50c",
+  "linux-64-gcc51": "b985d6a374f65c7d41bc786e6cef2bf5ee7b6b4f9fea6011e89b77bdd1d12e96",
+  "linux-64-gcc52": "b55aafbfd21bacec3a45e48167ff6d0d16ed07d089ae6a4af3418cdebf343d3c",
+  "linux-64-gcc53": "02893e36f4d4a19df0fedbe40d1cb37cac2f8d5baa4394b340c54d25a91ef742",
+  "mac-64": "6234f6832e5766970ba687d61e6d3904e7f591e78297edc5c799d1581c5b3669",
+}
+%}
+{% set _plat = "linux-64-gcc" + os.environ['HALIDE_GCC'] %}  # [linux]
 {% set _plat = "mac-64" %}  # [osx]
-{% set _plat = "linux-64-gcc53" %}  # [linux]
+{% set sha256 = shas.get(_plat) %}
+{% set build = 0 %}
 
 package:
   name: {{ name }}
@@ -12,18 +20,20 @@ package:
 
 source:
   url: https://github.com/halide/Halide/releases/download/release_{{ version.replace('.', '_') }}/halide-{{_plat}}-trunk-{{tag}}.tgz
+  {% if sha256 %}
   sha256: {{ sha256 }}
+  {% endif %}
 
 build:
-  number: 0
+  number: {{ build }}
   skip: true  # [win]
-  string: "repack"
+  string: "{{ _plat.replace('-', '_') }}_{{ build }}"
 
 requirements:
   build:
-    - zlib 1.2.*  # [linux]
+    - zlib 1.2.*
   run:
-    - zlib 1.2.*  # [linux]
+    - zlib 1.2.*
 
 about:
   home: http://halide-lang.org
