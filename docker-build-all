@@ -1,0 +1,15 @@
+#!/bin/bash
+set -xeuo pipefail
+
+# build linux repacks
+# to be run in halide-conda-build image
+
+for HALIDE_GCC in 49 51 52 53; do
+    if [[ $HALIDE_GCC == 49 ]]; then
+        export CXX=g++-4.9
+    else
+        export CXX=g++-5
+    fi
+    export HALIDE_GCC
+    conda build /io/halide-repack
+done
