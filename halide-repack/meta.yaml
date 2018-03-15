@@ -44,7 +44,7 @@ about:
   license: MIT
   license_family: MIT
   # license_file: LICENSE.txt
-  summary: 'Python bindings for Halide, a language for image processing and computational photography'
+  summary: 'Repack of official halide binary releases as conda packages'
 
   description: |
     Halide is a programming language designed to make it easier to write
